@@ -19,5 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('generatecv', [CVGeneratorController::class, 'index']);
-Route::get('cognito-hooks', [WebhooksController::class, 'inde']);
+Route::get('cognito-hooks', [WebhooksController::class, 'index']);
+Route::get('cognito-hooks/list', [WebhooksController::class, 'list']);
 Route::post('cognito-hooks', [WebhooksController::class, 'store']);

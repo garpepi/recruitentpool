@@ -13,5 +13,9 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        'http://localhost/cognito-hooks',
+        'https://localhost/cognito-hooks',
+        'http://dffc-118-136-75-240.ngrok.io/cognito-hooks',
+        'https://dffc-118-136-75-240.ngrok.io/cognito-hooks'
     ];
 }
