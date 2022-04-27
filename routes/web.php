@@ -1,0 +1,23 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CVGeneratorController;
+use App\Http\Controllers\WebhooksController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('generatecv', [CVGeneratorController::class, 'index']);
+Route::get('cognito-hooks', [WebhooksController::class, 'inde']);
+Route::post('cognito-hooks', [WebhooksController::class, 'store']);
