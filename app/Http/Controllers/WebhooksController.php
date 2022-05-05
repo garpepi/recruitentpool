@@ -226,7 +226,8 @@ class WebhooksController extends Controller
                     'weakness' => $additionalInformation->Weakness,
                     'overcome_weakness' => $additionalInformation->HowYouOvercomeYourWeakness,
                     'expected_salary' => $additionalInformation->ExpectedSalary,
-                    'estimate_join_date' => $additionalInformation->EstimateJoinDate
+                    'estimate_join_date' => $additionalInformation->EstimateJoinDate,
+                    'position' => $content->FORTHEPOSITION
                 ]
             );
 

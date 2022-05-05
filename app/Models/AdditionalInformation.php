@@ -17,6 +17,7 @@ class AdditionalInformation extends Model
         'weakness',
         'overcome_weakness',
         'expected_salary',
-        'estimate_join_date'
+        'estimate_join_date',
+        'position'
     ];
 }

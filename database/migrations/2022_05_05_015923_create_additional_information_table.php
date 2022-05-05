@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string("overcome_weakness",100);
             $table->integer("expected_salary");
             $table->string("estimate_join_date",15);
+            $table->string("position",50);
             $table->timestamps();
         });
     }
