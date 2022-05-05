@@ -11,6 +11,7 @@ class WorkingExperience extends Model
     protected $fillable = [
         'candidate_id',
         'working_status',
+        'name',
         'industry',
         'address',
         'start',

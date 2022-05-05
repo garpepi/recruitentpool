@@ -195,6 +195,7 @@ class WebhooksController extends Controller
                 $workingExperience = $workingExperience->ExperienceDetail;
                 $workingExpDetail = new WorkingExperience([
                     'working_status' => $workingExperience->StillWorking,
+                    'name' => $workingExperience->CompanyName,
                     'industry' => $workingExperience->Industry,
                     'address' => $workingExperience->Address,
                     'start' => $workingExperience->Start,

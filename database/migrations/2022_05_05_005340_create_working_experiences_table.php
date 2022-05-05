@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('candidate_id');
             $table->boolean('working_status');
+            $table->string('name', 100);
             $table->string('industry', 50);
             $table->string('address', 150);
             $table->string('start', 10);
