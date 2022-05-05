@@ -21,7 +21,8 @@ use App\Http\Controllers\DashboardController;
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::get('generatecv', [CVGeneratorController::class, 'index']);
-Route::get('generatecv/{candidateId}', [CVGeneratorController::class, 'show']);
+Route::get('generatecv/{candidateId}/adidata', [CVGeneratorController::class, 'show'])->name('generateCV-adidata');
+Route::get('generatecv/{candidateId}/bi', [CVGeneratorController::class, 'showBi'])->name('generateCV-bi');
 Route::get('cognito-hooks', [WebhooksController::class, 'index']);
 Route::get('cognito-hooks/list', [WebhooksController::class, 'list']);
 Route::post('cognito-hooks', [WebhooksController::class, 'store']);

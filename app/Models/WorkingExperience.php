@@ -24,4 +24,9 @@ class WorkingExperience extends Model
     {
         return $this->hasMany(WorkingProject::class, 'working_experience_id');
     }
+
+    public function getLastProject()
+    {
+        return $this->hasMany(WorkingProject::class, 'working_experience_id')->first();
+    }
 }

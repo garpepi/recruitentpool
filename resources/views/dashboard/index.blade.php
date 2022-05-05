@@ -55,7 +55,14 @@
                                             <td>{{ $candidate->additionalInformation->position }}</td>
                                             <td>{{ $candidate->mobile_phone }}</td>
                                             <td>{{ ($candidate->freshgraduate == "0" ? "Fresh" : "Experienced") }}</td>
-                                            <td>{{ $candidate->id }}</td>
+                                            <td>
+                                                <a href="{{ route('generateCV-adidata', $candidate->id) }}" class="btn btn-danger" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                </a>
+                                                <a href="{{ route('generateCV-bi', $candidate->id) }}" class="btn btn-danger" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                </a>
+                                            </td>
                                         </tr> 
                                     @endforeach
                                     </tbody>

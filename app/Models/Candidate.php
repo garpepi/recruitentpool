@@ -44,6 +44,11 @@ class Candidate extends Model
         return $this->hasMany(FormalEducation::class)->orderBy('graduates', 'desc');
     }
 
+    public function getLastEducation()
+    {
+        return $this->hasMany(FormalEducation::class)->orderBy('graduates', 'desc')->first();
+    }
+
     public function nonFormalEducation()
     {
         return $this->hasMany(NonFormalEducation::class)->orderBy('year', 'desc');
