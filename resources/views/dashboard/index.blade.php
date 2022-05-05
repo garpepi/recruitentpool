@@ -57,10 +57,13 @@
                                             <td>{{ ($candidate->freshgraduate == "0" ? "Fresh" : "Experienced") }}</td>
                                             <td>
                                                 <a href="{{ route('generateCV-adidata', $candidate->id) }}" class="btn btn-danger" target="_blank" rel="noopener noreferrer">
-                                                    <i class="fas fa-file-pdf"></i>
+                                                    <i class="fas fa-file-pdf"></i> Adidata
                                                 </a>
                                                 <a href="{{ route('generateCV-bi', $candidate->id) }}" class="btn btn-danger" target="_blank" rel="noopener noreferrer">
-                                                    <i class="fas fa-file-pdf"></i>
+                                                    <i class="fas fa-file-pdf"></i> BI
+                                                </a>
+                                                <a href="{{ route('ziparchive', $candidate->id) }}" class="btn btn-success" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fas fa-file-archive"></i> Docs
                                                 </a>
                                             </td>
                                         </tr> 
