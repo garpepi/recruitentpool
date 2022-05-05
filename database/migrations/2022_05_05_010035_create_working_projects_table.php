@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('position', 50);
             $table->string('division', 50);
-            $table->string('descriptions', 5000);
+            $table->text('descriptions');
             $table->timestamps();
         });
     }

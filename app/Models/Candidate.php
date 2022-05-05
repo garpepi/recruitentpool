@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use League\CommonMark\Node\Block\Document;
 
 class Candidate extends Model
 {
@@ -40,12 +41,12 @@ class Candidate extends Model
 
     public function formalEducation()
     {
-        return $this->hasMany(FormalEducation::class);
+        return $this->hasMany(FormalEducation::class)->orderBy('graduates', 'desc');
     }
 
     public function nonFormalEducation()
     {
-        return $this->hasMany(NonFormalEducation::class);
+        return $this->hasMany(NonFormalEducation::class)->orderBy('year', 'desc');
     }
   
     public function languages()
@@ -75,7 +76,7 @@ class Candidate extends Model
     
     public function workingExperiences()
     {
-        return $this->hasMany(WorkingExperience::class);
+        return $this->hasMany(WorkingExperience::class)->orderBy('working_status', 'asc')->orderBy('start', 'desc');
     }
 
     public function additionalInformation()
@@ -86,6 +87,11 @@ class Candidate extends Model
     public function documents()
     {
         return $this->hasMany(Documents::class);
+    }
+
+    public function getPhoto()
+    {
+        return $this->hasMany(Documents::class)->where('type', 'Photo')->first();
     }
 
 }
