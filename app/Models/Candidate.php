@@ -37,4 +37,56 @@ class Candidate extends Model
     {
         return $this->hasMany(Family::class);
     }
+
+    public function formalEducation()
+    {
+        return $this->hasMany(FormalEducation::class);
+    }
+
+    public function nonFormalEducation()
+    {
+        return $this->hasMany(NonFormalEducation::class);
+    }
+  
+    public function languages()
+    {
+        return $this->hasMany(LanguageProficiencies::class);
+    }
+
+    public function skills()
+    {
+        return $this->hasMany(Skill::class);
+    }
+
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class);
+    }
+
+    public function organizations()
+    {
+        return $this->hasMany(Organization::class);
+    }
+
+    public function referrences()
+    {
+        return $this->hasMany(Refference::class);
+    }
+    
+    public function workingExperiences()
+    {
+        return $this->hasMany(WorkingExperience::class);
+    }
+
+    public function additionalInformation()
+    {
+        return $this->hasOne(AdditionalInformation::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Documents::class);
+    }
+
 }
+

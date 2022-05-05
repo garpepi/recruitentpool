@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Candidate;
 use App\Models\Family;
+use App\Models\FormalEducation;
+use App\Models\NonFormalEducation;
+use App\Models\LanguageProficiencies;
+use App\Models\Skill;
+use App\Models\Certificate;
+use App\Models\Organization;
+use App\Models\Refference;
+use App\Models\WorkingExperience;
+use App\Models\WorkingProject;
+use App\Models\Documents;
+use App\Models\Logs;
 
 class WebhooksController extends Controller
 {
@@ -24,6 +35,7 @@ class WebhooksController extends Controller
             echo '<a href = http://localhost/storage/hookers/'.$file.'>'.$file.'</a><br>' ;
         }
     }
+    
     public function store(Request $request) {
         // backup the return
         $filename = Carbon::now()->timestamp;
@@ -94,13 +106,177 @@ class WebhooksController extends Controller
             }
             $candidate->families()->saveMany($families);
 
+            // Formal Education
+            $formalEdu = [];
+            foreach($content->Educations->FormalEducation as $education) {
+                $formalEdu[] = new FormalEducation([
+                    'institution' => $education->InstitutionName,
+                    'grades' => $education->Grades,
+                    'city' => $education->City,
+                    'start' => $education->Start,
+                    'graduates' => $education->Graduates,
+                    'gpa' => $education->GPA
+                ]);
+            }
+            $candidate->formalEducation()->saveMany($formalEdu);
+
+            // Non-Formal Education
+            $nonFormalEdu = [];
+            foreach($content->Educations->NonformalEducation as $education) {
+                $nonFormalEdu[] = new NonFormalEducation([
+                    'course_name' => $education->CourseName,
+                    'year' => $education->Year,
+                    'duration' => $education->Duration,
+                    'certificate' => $education->Certificate
+                ]);
+            }
+            $candidate->nonFormalEducation()->saveMany($nonFormalEdu);
+
+            // Language Proficiencies
+            $languages = [];
+            foreach($content->SkillsProficiencies->LanguageProficiencies as $language) {
+                $languages[] = new LanguageProficiencies([
+                    'language' => $language->Language,
+                    'written' => $language->Written,
+                    'speaking' => $language->Speaking,
+                    'reading' => $language->Reading
+                ]);
+            }
+            $candidate->languages()->saveMany($languages);
+
+            // Skills
+            $skills = [];
+            foreach($content->Skills as $skill) {
+                $skills[] = new Skill([
+                    'skill' => $skill->Skill,
+                    'proficiency_level' => $skill->ProficiencyLevel
+                ]);
+            }
+            $candidate->skills()->saveMany($skills);
+
+            // Certificate
+            $certificates = [];
+            foreach($content->Certificates as $certificate) {
+                $certificates[] = new Certificate([
+                    'name' => $certificate->CertificateName,
+                    'issuer' => $certificate->Issuer,
+                    'year' => $certificate->Year,
+                    'expired_date' => $certificate->ExpiredDate
+                ]);
+            }
+            $candidate->certificates()->saveMany($certificates);
+
+            // Organization
+            $organizations = [];
+            foreach($content->Organizations as $org) {
+                $organizations[] = new Organization([
+                    'name' => $org->OrganizationName,
+                    'type' => $org->OrganizationType,
+                    'year' => $org->Year,
+                    'position' => $org->Position
+                ]);
+            }
+            $candidate->organizations()->saveMany($organizations);
+
+            // Refferences
+            $refferences = [];
+            foreach($content->ReferencesAndRecomendations as $reff) {
+                $refferences[] = new Refference([
+                    'name' => $reff->ReferenceName,
+                    'phone_number' => $reff->PhoneNumber,
+                    'position' => $reff->Position,
+                    'relationship' => $reff->Relationship
+                ]);
+            }
+            $candidate->referrences()->saveMany($refferences);
+
+            // Working Experiences
+            foreach($content->WorkingExperiences as $workingExperience) {
+                $workingExperience = $workingExperience->ExperienceDetail;
+                $workingExpDetail = new WorkingExperience([
+                    'working_status' => $workingExperience->StillWorking,
+                    'industry' => $workingExperience->Industry,
+                    'address' => $workingExperience->Address,
+                    'start' => $workingExperience->Start,
+                    'exit' => $workingExperience->ExitDate,
+                    'exit_reasons' => $workingExperience->ExitReasons,
+                    'allowance' => implode(", ",$workingExperience->Allowance)
+                ]);
+
+                $projects = [];
+                foreach($workingExperience->Projects as $project) {
+                    $projects[] = new WorkingProject([
+                        'name' => $project->ProjectName,
+                        'position' => $project->Position,
+                        'division' => $project->Division,
+                        'descriptions' => $project->Descriptions
+                    ]);
+                }
+                $candidate->workingExperiences()->save($workingExpDetail)->projects()->saveMany($projects);
+            }
+
+            // Additional Information
+            $additionalInformation = $content->AdditionalInformations;
+            $candidate->additionalInformation()->create(
+                [
+                    'job_source_info' => $additionalInformation->WhereDidYouGetThisJobVacancy,
+                    'hospitalize_status' => $additionalInformation->HaveYouBeenHospitalizedAndorSeriouslyIll,
+                    'serious_ill' => $additionalInformation->SeriousIll,
+                    'strenght' => $additionalInformation->Strenght,
+                    'weakness' => $additionalInformation->Weakness,
+                    'overcome_weakness' => $additionalInformation->HowYouOvercomeYourWeakness,
+                    'expected_salary' => $additionalInformation->ExpectedSalary,
+                    'estimate_join_date' => $additionalInformation->EstimateJoinDate
+                ]
+            );
+
+            // Documents
+            $documents = [];
+            foreach($content->AdditionalInformations->Documents as $type => $docs) {
+                foreach($docs as  $docDetail){
+                    $fileName = $docDetail->Id.$docDetail->Name;
+                    $documents[] = new Documents([
+                        'type' => $type,
+                        'file_name' => $fileName,
+                        'size' => $docDetail->Size,
+                        'content_type' => $docDetail->ContentType,
+                        'cognito_link' => $docDetail->File
+                    ]);
+                    try{
+                        Storage::disk('docs')->put($fileName, file_get_contents($docDetail->File));
+                    }catch(Error $e){
+                        Logs::create([
+                            "logs" => $filename." Error on saving docs ".$fileName
+                        ]);
+                        continue;
+                    }
+                }
+            }
+            $candidate->documents()->saveMany($documents);
+
             DB::commit();
+
+            Logs::create([
+                "logs" => $filename." Success on saving to DB [".$filename." - ".Carbon::now()->timestamp."]"
+            ]);
         }catch (Exception $e) {
+
             DB::rollback();
-            dd($e);
+            Logs::create([
+                "logs" => $filename." Error on saving to DB ".$e->getMessage()
+            ]);
+            return response()->json([
+                'message' => 'Error',
+                'start' => $filename,
+                'end' => Carbon::now()->timestamp
+            ], 500);
         }
         
-        echo 'success';
+        return response()->json([
+            'message' => 'Success',
+            'start' => $filename,
+            'end' => Carbon::now()->timestamp
+        ], 200);
     }
 
     private function isNo($string) {

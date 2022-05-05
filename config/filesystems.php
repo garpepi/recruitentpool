@@ -52,6 +52,14 @@ return [
             'throw' => false,
         ],
 
+        'docs' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/docs'),
+            'url' => env('APP_URL').'/storage/docs',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -79,6 +87,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public/hookers'),
+        public_path('docs') => storage_path('app/public/docs'),
     ],
 
 ];
