@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CVGeneratorController;
 use App\Http\Controllers\WebhooksController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,10 +15,11 @@ use App\Http\Controllers\WebhooksController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('/', [DashboardController::class, 'index']);
 Route::get('generatecv', [CVGeneratorController::class, 'index']);
 Route::get('cognito-hooks', [WebhooksController::class, 'index']);
 Route::get('cognito-hooks/list', [WebhooksController::class, 'list']);
