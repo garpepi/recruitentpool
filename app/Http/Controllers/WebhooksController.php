@@ -85,14 +85,16 @@ class WebhooksController extends Controller
 
             // Family
             $families = [];
-            foreach($content->FAMILYDATA->Family as $family) {
-                $families[] = new Family([
-                    'name' => $family->Name,
-                    'status' => $family->Status,
-                    'gender' => $family->Gender,
-                    'occupation' => $family->Occupation,
-                    'education' => $family->Education
-                ]);
+            if ($content->FAMILYDATA->MaritalStatus != 'Single') {
+                foreach($content->FAMILYDATA->Family as $family) {
+                    $families[] = new Family([
+                        'name' => $family->Name,
+                        'status' => $family->Status,
+                        'gender' => $family->Gender,
+                        'occupation' => $family->Occupation,
+                        'education' => $family->Education
+                    ]);
+                }
             }
 
             foreach($content->FAMILYDATA->CloseFamilyInformation as $family) {
