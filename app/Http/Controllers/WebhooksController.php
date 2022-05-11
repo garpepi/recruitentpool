@@ -203,7 +203,8 @@ class WebhooksController extends Controller
                     'start' => $workingExperience->Start,
                     'exit' => $workingExperience->ExitDate,
                     'exit_reasons' => $workingExperience->ExitReasons,
-                    'allowance' => implode(", ",$workingExperience->Allowance)
+                    'allowance' => implode(", ",$workingExperience->Allowance),
+                    'salary' => $workingExperience->Salary
                 ]);
 
                 $projects = [];

@@ -17,7 +17,8 @@ class WorkingExperience extends Model
         'start',
         'exit',
         'exit_reasons',
-        'allowance'
+        'allowance',
+        'salary'
     ];
 
     public function projects()

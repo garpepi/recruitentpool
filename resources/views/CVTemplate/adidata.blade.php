@@ -158,7 +158,7 @@
             @foreach ($candidate->workingExperiences as $index => $workingExperiences)
                 <tr style="vertical-align: top; text-align: left;  width: 20%">
                     <td class="sub_title">
-                    {{ $index+1 .". ".DateTime::createFromFormat('Y-m-d', $workingExperiences->start)->format('M Y')." - ".($workingExperiences->working_status ? DateTime::createFromFormat('Y-m-d', $workingExperiences->exit)->format('M Y') : "at present" ) }}
+                    {{ $index+1 .". ".DateTime::createFromFormat('Y-m-d', $workingExperiences->start)->format('M Y')." - ".($workingExperiences->working_status ? "at present" : DateTime::createFromFormat('Y-m-d', $workingExperiences->exit)->format('M Y') ) }}
                     </td>
                     <td>
                     : {{ $workingExperiences->name }}
