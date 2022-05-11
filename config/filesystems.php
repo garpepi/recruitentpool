@@ -86,7 +86,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('app/public/hookers'),
+        public_path('hookers') => storage_path('app/public/hookers'),
         public_path('docs') => storage_path('app/public/docs'),
     ],
 

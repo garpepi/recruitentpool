@@ -1,4 +1,13 @@
+<?php
+header("Content-Type: application/vnd.ms-word");
+header("Expires: 0");
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header("content-disposition: attachment;filename=CV-".$candidate->fullname.".doc");
+?>
 <style type="text/css">
+    page {
+        font-family: 'Times New Roman', Times, serif;
+    }
     div.note {
         border: solid 1mm #DDDDDD;
         background-color: #EEEEEE;
@@ -66,7 +75,6 @@
         width: 210mm;
         height: 28mm;
         left: 0mm;
-        top: 269mm;
         font-weight: 400;
         font-size: 4mm;
         line-height: 5mm;
@@ -87,14 +95,6 @@
 
 </style>
 <page backtop="40mm" backbottom="30mm" backleft="10mm" backright="10mm" style="font-size: 12pt">
-    <page_footer>
-        <div class="text-footer">
-            <span>PT. Adi Data Informatika</span><br>
-            <span>Gedung Graha Kencana Lt 7, JL.Raya Perjuangan No 88, Kebon Jeruk 11530 INDONESIA</span><br>
-            <span>Telp: +62 21 53660016, Fax: +622153675392</span><br>
-            <span>www.adidata.co.id</span>
-        </div>
-    </page_footer>
 
 
     <!-- Content here!-->
@@ -175,4 +175,5 @@
         </tbody>
     </table>
     <br/><br/><br/><br/>
+    <img src="{{ getcwd() }}/logo.png"/ style="width: 200px;">
 </page>

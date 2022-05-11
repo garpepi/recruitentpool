@@ -38,6 +38,7 @@ class CVGeneratorController extends Controller
         $candidate = Candidate::findOrFail($candidateId);
         $html2pdf = new Html2Pdf('P', 'A4', 'en', true, 'UTF-8', array(0, 0, 0, 0));
         $html2pdf->pdf->SetDisplayMode('fullpage');
+        $html2pdf->setDefaultFont("frutinger");
         $view = View::make('CVTemplate.bi', ['candidate' => $candidate]);
         $html2pdf->writeHTML($view->render());
         $html2pdf->output('CV-'.$candidate->fullname.'.pdf');
