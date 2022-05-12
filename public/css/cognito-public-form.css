@@ -1,0 +1,116 @@
+/* CSS for the public form proper as well as other internally embedded forms such as builder preview. */
+
+html:root:root:root:root:root,
+:root:root:root:root:root body {
+	height: 100%;
+	box-sizing: border-box;
+	margin: 0;
+	overscroll-behavior: none;
+}
+
+:root:root:root:root:root .cog-form {
+	overflow: auto;
+}
+
+:root:root:root:root:root:root:root .cog-form {
+	width: 100%;
+	min-width: 100%;
+	height: 100%;
+	min-height: 100%;
+}
+
+:root:root:root:root:root:root .cog-form.cog-cognito--styled {
+	background-color: var(--page__background-color);
+	background-image: var(--page__background-image);
+	background-size: var(--page__background-size);
+	background-attachment: fixed;
+}
+
+:root:root:root:root.cog-public-form .cog-form__container {
+	min-height: 0;
+	margin: var(--page__margins);
+	transition: .2s;
+}
+
+:root:root:root:root .cog-form[data-stretch] {
+	margin: 0 auto auto;
+}
+
+:root:root:root:root .cog-form[data-stretch] .cog-form__container {
+	min-height: 100%;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+	/*
+		We apply page background to the .cog-form element because CSS vars are scoped to each form by the .cog-{formID} class.
+		However, applying the background to this element rather than the body causes the image to jitter when scrolling in IE.
+		Here, we take advantage of the fact that the css-vars-ponyfill doesn't respect this scoping and the fact that we don't
+		need these page-level variables to be scoped. This allows us to apply these to the body and avoid the jitter.
+	*/
+	:root:root:root:root:root body {
+		background-attachment: fixed;
+		background-color: var(--page__background-color);
+		background-image: var(--page__background-image);
+		background-size: var(--page__background-size);
+	}
+
+	:root:root:root:root:root:root .cog-form {
+		background-attachment: none;
+		background-color: transparent;
+		background-image: none;
+		background-size: none;
+	}
+}
+
+/* Top selector is for publish page (doesn't hurt other views because it is on outer container), bottom selector for public-form */
+:root:root:root:root:root .cog-cognito--styled:not(.cog-form--transparent-background),
+:root:root:root:root:root .cog-cognito--styled:not(.cog-form--transparent-background) .cog-form__container {
+	box-shadow: 0 0 10px hsla(0, 0%, 0%, .1), 1px 1px 2px hsla(0, 0%, 0%, .1);
+}
+
+:root:root:root:root:root .cog-form--maximal-branding {
+	padding-bottom: 50px;
+}
+
+/*
+	Public Form Margins
+	Right now, embedded form margins are handled idenpendantly with --form__margins.
+
+	When we drop support for IE the below can be replaced with:
+	:root .cog-form {
+		--form__margins: 45px;
+	}
+ */
+
+/* About 450px and wider */
+:root:root:root:root:root:root [data-width~='450'] .cog-header.cog-wrapper {
+	padding-top: calc(var(--gutter) * 1.5);
+}
+
+:root:root:root:root:root [data-width~='450'] .cog-wrapper.cog-wrapper,
+:root:root:root:root:root [data-width~='450'] .cog-page-progress.cog-page-progress ol {
+	padding-right: calc(var(--gutter) * 1.5);
+	padding-left: calc(var(--gutter) * 1.5);
+}
+
+:root:root:root:root:root:root [data-width~='450'] .cog-form__container {
+	padding-bottom: calc(var(--gutter) * 1.5);
+}
+
+/* About 450px and skinnier */
+:root:root:root:root:root:root .cog-header.cog-wrapper {
+	padding-top: var(--gutter);
+}
+
+:root:root:root:root:root .cog-wrapper.cog-wrapper,
+:root:root:root:root:root .cog-page-progress.cog-page-progress ol {
+	padding-right: var(--gutter);
+	padding-left: var(--gutter);
+}
+
+:root:root:root:root:root:root .cog-form__container {
+	padding-bottom: calc(var(--gutter) * 1.25);
+}

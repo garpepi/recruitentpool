@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CVGeneratorController;
 use App\Http\Controllers\WebhooksController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DetailinfoController;
 use App\Http\Controllers\ZipController;
 
 /*
@@ -33,3 +34,4 @@ Route::get('cognito-hooks', [WebhooksController::class, 'index']);
 Route::get('cognito-hooks/list', [WebhooksController::class, 'list']);
 Route::post('cognito-hooks', [WebhooksController::class, 'store']);
 Route::get('ziparchive/{candidateId}', [ZipController::class, 'downloadZip'])->name('ziparchive');
+Route::get('detail/{candidateId}', [DetailinfoController::class, 'index'])->name('detail');
