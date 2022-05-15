@@ -117,7 +117,8 @@ class WebhooksController extends Controller
                     'city' => $education->City,
                     'start' => $education->Start,
                     'graduates' => $education->Graduates,
-                    'gpa' => $education->GPA
+                    'gpa' => $education->GPA,
+                    'major' => $education->Major
                 ]);
             }
             $candidate->formalEducation()->saveMany($formalEdu);

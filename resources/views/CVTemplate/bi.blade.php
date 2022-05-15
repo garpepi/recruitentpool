@@ -87,15 +87,6 @@
 
 </style>
 <page backtop="40mm" backbottom="30mm" backleft="10mm" backright="10mm" style="font-size: 12pt">
-    <page_footer>
-        <div class="text-footer">
-            <span>PT. Adi Data Informatika</span><br>
-            <span>Gedung Graha Kencana Lt 7, JL.Raya Perjuangan No 88, Kebon Jeruk 11530 INDONESIA</span><br>
-            <span>Telp: +62 21 53660016, Fax: +622153675392</span><br>
-            <span>www.adidata.co.id</span>
-        </div>
-    </page_footer>
-
 
     <!-- Content here!-->
     <h4> CURRICULUM VITAE </h4>
@@ -132,7 +123,7 @@
             <tr>
                 <td style="text-align: left;  width: 5%; ">5.</td>
                 <td style="text-align: left;  width: 30%; ">Pendidikan</td>
-                <td style="text-align: left;  width: 60%">: {{ $candidate->getLastEducation()->grades.", ".$candidate->getLastEducation()->institution.", ".DateTime::createFromFormat('Y-m-d', $candidate->getLastEducation()->graduates)->format('Y') }}</td>
+                <td style="text-align: left;  width: 60%">: {{ $candidate->getLastEducation()->grades." - ".$candidate->getLastEducation()->major.", ".$candidate->getLastEducation()->institution.", ".DateTime::createFromFormat('Y-m-d', $candidate->getLastEducation()->graduates)->format('Y') }}</td>
             </tr>
             <tr>
                 <td style="text-align: left; vertical-align: text-top; width: 5%; ">6.</td>

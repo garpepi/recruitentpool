@@ -132,7 +132,7 @@ header("content-disposition: attachment;filename=CV-".$candidate->fullname.".doc
             <tr>
                 <td style="text-align: left;  width: 5%; ">5.</td>
                 <td style="text-align: left;  width: 30%; ">Pendidikan</td>
-                <td style="text-align: left;  width: 60%">: {{ $candidate->getLastEducation()->grades.", ".$candidate->getLastEducation()->institution.", ".DateTime::createFromFormat('Y-m-d', $candidate->getLastEducation()->graduates)->format('Y') }}</td>
+                <td style="text-align: left;  width: 60%">: {{ $candidate->getLastEducation()->grades." - ".$candidate->getLastEducation()->major.", ".$candidate->getLastEducation()->institution.", ".DateTime::createFromFormat('Y-m-d', $candidate->getLastEducation()->graduates)->format('Y') }}</td>
             </tr>
             <tr>
                 <td style="text-align: left; vertical-align: text-top; width: 5%; ">6.</td>

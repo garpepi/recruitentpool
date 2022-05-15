@@ -112,7 +112,7 @@ header("content-disposition: attachment;filename=CV-".$candidate->fullname.".doc
                 {{ $index+1 .'. '.substr($formalEducation->start, 0, 4)."-".substr($formalEducation->graduates, 0, 4) }}
                 </td>
                 <td style="text-align: left;  width: 70%">
-                : {{ $formalEducation->institution }}
+                : {{ $formalEducation->major." - ".$formalEducation->institution.", ".$formalEducation->gpa }}
                 </td>
             </tr>  
         @endforeach

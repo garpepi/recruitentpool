@@ -15,6 +15,7 @@ class FormalEducation extends Model
         'gpa',
         'city',
         'start',
-        'graduates'
+        'graduates',
+        'major'
     ];
 }
