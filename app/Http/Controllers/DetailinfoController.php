@@ -9,6 +9,7 @@ class DetailinfoController extends Controller
 {
     //
     public function index($candidateId) {
-        return view('Detail.index');
+        $candidate = Candidate::findOrFail($candidateId);
+        return view('Detail.index', ['candidate' => $candidate]);
     }
 }

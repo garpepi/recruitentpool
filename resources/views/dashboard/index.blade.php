@@ -62,14 +62,17 @@
                                                 <a href="{{ route('generateCV-bi', $candidate->id) }}" class="btn btn-danger" target="_blank" rel="noopener noreferrer">
                                                     <i class="fas fa-file-pdf"></i> BI
                                                 </a>
-                                                <a href="{{ route('generateDocCV-adidata', $candidate->id) }}" class="btn btn-danger" target="_blank" rel="noopener noreferrer">
-                                                    <i class="fas fa-file-doc"></i> Adidata
+                                                <a href="{{ route('generateDocCV-adidata', $candidate->id) }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fas fa-file-word"></i> Adidata
                                                 </a>
-                                                <a href="{{ route('generateDocCV-bi', $candidate->id) }}" class="btn btn-danger" target="_blank" rel="noopener noreferrer">
-                                                    <i class="fas fa-file-doc"></i> BI
+                                                <a href="{{ route('generateDocCV-bi', $candidate->id) }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fas fa-file-word"></i> BI
                                                 </a>
-                                                <a href="{{ route('ziparchive', $candidate->id) }}" class="btn btn-success" target="_blank" rel="noopener noreferrer">
+                                                <a href="{{ route('ziparchive', $candidate->id) }}" class="btn btn-warning" target="_blank" rel="noopener noreferrer">
                                                     <i class="fas fa-file-archive"></i> Docs
+                                                </a>
+                                                <a href="{{ route('detail', $candidate->id) }}" class="btn btn-success" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fas fa-eye"></i> Show
                                                 </a>
                                             </td>
                                         </tr> 

@@ -81,7 +81,7 @@ class Candidate extends Model
     
     public function workingExperiences()
     {
-        return $this->hasMany(WorkingExperience::class)->orderBy('working_status', 'asc')->orderBy('start', 'desc');
+        return $this->hasMany(WorkingExperience::class)->orderBy('working_status', 'desc')->orderBy('start', 'desc');
     }
 
     public function additionalInformation()
